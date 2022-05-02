@@ -1,13 +1,21 @@
+const TerserPlugin = require("terser-webpack-plugin");
+
 module.exports = {
     mode: 'none',
     entry: {
         index: './src/scripts/index.js',  //При необходимости вы можете добавить новую точку входа
-        second: './src/scripts/second.js',
     },
     output: {
       filename: '[name].js',
       clean: true,
     },
+    optimization: config = {
+      splitChunks: {
+          chunks: 'all',
+      },
+      minimize: true,
+      minimizer: [new TerserPlugin()],
+      },
     module: {
       rules: [
         {
